@@ -8,7 +8,7 @@ pages:
   stage: deploy
   script:
     - mkdir public
-    - rsync -av --exclude='public' . public
+    - find . -maxdepth 1 ! -path ./public ! -path . -exec cp -r {} public \;
   artifacts:
     paths:
       - public
