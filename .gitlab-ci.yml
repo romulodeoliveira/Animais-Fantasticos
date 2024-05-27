@@ -2,23 +2,13 @@
 image: node:lts
 
 stages:
-  - build
   - deploy
-
-build:
-  stage: build
-  script:
-    - echo "No build steps are necessary for a simple HTML/JS project."
-  artifacts:
-    paths:
-      - public
 
 pages:
   stage: deploy
   script:
     - mkdir public
-    - cp -r * public/
-    - rm -rf public/public
+    - rsync -av --exclude='public' . public
   artifacts:
     paths:
       - public
