@@ -1,2 +1,25 @@
 # The Docker image that will be used to build your app
 image: node:lts
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - echo "No build steps are necessary for a simple HTML/JS project."
+  artifacts:
+    paths:
+      - public
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - cp -r * public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
