@@ -1,0 +1,16 @@
+# The Docker image that will be used to build your app
+image: node:lts
+
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - find . -maxdepth 1 ! -path ./public ! -path . -exec cp -r {} public \;
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
